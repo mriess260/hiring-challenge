@@ -1,0 +1,31 @@
+<!--
+  Generated template for the MediaBoardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Media Board</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotoAddMediaPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <!-- reiterates for each piece of media in list -->
+    <ion-item *ngFor="let media of mediaListRef$ | async"
+    (click)="selectMediaItem(media.key)">
+      <h2>{{media.payload.val().title}}</h2>
+      <h3>{{media.payload.val().url}}</h3>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

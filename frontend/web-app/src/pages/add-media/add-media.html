@@ -1,0 +1,52 @@
+<!--
+  Generated template for the AddMediaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Add Media</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label floating>Title</ion-label>
+    <ion-input type="text" [(ngModel)]="mediaItem.title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>URL</ion-label>
+    <ion-input type="url" [(ngModel)]="mediaItem.url"></ion-input>
+  </ion-item>
+
+<!--
+  <ion-item>
+    <ion-label floating>Description</ion-label>
+    <ion-input id="mediaInputDescript" type="text" [(ngModel)]="mediaItem.descript"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Media File</ion-label>
+    <ion-input id="mediaInputValue" type="file" [(ngModel)]="mediaItem.value"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Media URL</ion-label>
+    <ion-input id="mediaInputURL" type="url" [(ngModel)]="mediaItem.url"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Thumbnail URL</ion-label>
+    <ion-input id="mediaInputThumbnl" type="url" [(ngModel)]="mediaItem.thumbnl"></ion-input>
+  </ion-item>
+-->
+
+  <button ion-button block (click)="addMediaItem(mediaItem)">Add Media</button>
+
+</ion-content>
