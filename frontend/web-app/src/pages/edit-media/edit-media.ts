@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //----------------
 import {  AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { Subscription } from 'rxjs/Subscription'
 //----------------
 import { MediaItem } from '../../models/media-item/media-item.interface'
 //----------------
@@ -14,8 +15,8 @@ import { MediaItem } from '../../models/media-item/media-item.interface'
 export class EditMediaPage {
 
   //mediaItemRef$: FireBaseObjectObservable<MediaItem>;
-  ediaItemRef$: AngularFireObject<MediaItem>;
-  mediaItemEditRef$: AngularFireObject<MediaItem>;
+  mediaItemRef$: AngularFireObject<MediaItem>;
+  mediaItemSubscription: Subscription;
   mediaItem = {} as MediaItem;
 
 
@@ -28,23 +29,28 @@ export class EditMediaPage {
     //set scope of firebase obj equal to navParams
     this.mediaItemRef$ = this.database.object(`media-list/${mediaItemId}`);
 
-    this.mediaItemEditRef$ = this.mediaItemRef$;
-
     //subscribe to obj and assign results to this.mediaItem
-    this.mediaItemRef$.valueChanges().subscribe(mediaItem => this.mediaItem = mediaItem);
+    this.mediaItemSubscription = this.database.object(`media-list/${mediaItemId}`)
+    .valueChanges().subscribe(mediaItem => this.mediaItem = mediaItem);
 
   }
 
 
   //update firebase node with new data
   editMediaItem(mediaItem: MediaItem){
-    this.mediaItemEditRef$.update(mediaItem);
+    this.mediaItemRef$.update(mediaItem);
 
     //Clear mediaItem
     this.mediaItem = {} as MediaItem;
 
     //go back to media board
     this.navCtrl.pop();
+  }
+
+
+  ionViewWillLeave(){
+    //unsubscribe from observable when leave
+    this.mediaItemSubscription.unsubscribe();
   }
 
 }
