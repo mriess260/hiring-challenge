@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 //---------
 import { AddMediaPage } from '../add-media/add-media';
 import { EditMediaPage } from '../edit-media/edit-media';
+import { ViewMediaPage } from '../view-media/view-media';
 import { MediaItem } from '../../models/media-item/media-item.interface';
 //--------
 
@@ -15,6 +16,7 @@ import { MediaItem } from '../../models/media-item/media-item.interface';
   selector: 'page-media-board',
   templateUrl: 'media-board.html',
 })
+
 export class MediaBoardPage {
 
   mediaListRef$: AngularFireList<MediaItem>;
@@ -29,7 +31,12 @@ export class MediaBoardPage {
 
   }
 
-  selectMediaItem(key: string, title: string){
+  selectMediaItem(key: string){
+    //go to editMediaPage, passing key (id) as param
+    this.navCtrl.push(ViewMediaPage, { mediaItemId: key });
+  }
+
+  /*
     console.log(key);
     console.log(title);
     this.actionSheetCtrl.create({
@@ -61,6 +68,7 @@ export class MediaBoardPage {
       ]
     }).present();
   }
+*/
 
   gotoAddMediaPage() {
     //go to AddMediaPage

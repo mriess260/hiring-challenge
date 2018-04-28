@@ -10,6 +10,7 @@ import { FIREBASE_CREDENTS } from './firebase.credentials';
 import { MediaBoardPage } from '../pages/media-board/media-board';
 import { AddMediaPage } from '../pages/add-media/add-media';
 import { EditMediaPage } from  '../pages/edit-media/edit-media';
+import { ViewMediaPage } from '../pages/view-media/view-media';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 //------------
 
@@ -21,6 +22,7 @@ import { MyApp } from './app.component';
     MyApp,
     MediaBoardPage,
     AddMediaPage,
+    ViewMediaPage,
     EditMediaPage
   ],
   imports: [
@@ -38,6 +40,7 @@ import { MyApp } from './app.component';
     MyApp,
     MediaBoardPage,
     AddMediaPage,
+    ViewMediaPage,
     EditMediaPage
   ],
   providers: [

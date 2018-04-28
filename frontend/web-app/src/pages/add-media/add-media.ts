@@ -72,7 +72,9 @@ export class AddMediaPage {
     // create new anonymous object and push this to firebase under media-list node
     this.mediaItemRef$.push({
       title: this.mediaItem.title,
-      url: this.mediaItem.url
+      url: this.mediaItem.url,
+      descript: this.mediaItem.descript,
+      thmbnl_url: this.mediaItem.thmbnl_url
     });
 
     //Clear mediaItem

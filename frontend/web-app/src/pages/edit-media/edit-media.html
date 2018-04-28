@@ -1,9 +1,3 @@
-<!--
-  Generated template for the EditMediaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -14,16 +8,60 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label floating>Title</ion-label>
-    <ion-input type="text" [(ngModel)]="mediaItem.title"></ion-input>
-  </ion-item>
+  <form [formGroup]="formGroup">
 
-  <ion-item>
-    <ion-label floating>URL</ion-label>
-    <ion-input type="url" [(ngModel)]="mediaItem.url"></ion-input>
-  </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" formControlName="title" [(ngModel)]="mediaItem.title"></ion-input>
+      </ion-item>
+      <div ion-text color="danger" class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.title">
+          <div class="error-message" *ngIf="formGroup.get('title').hasError(validation.type) && (formGroup.get('title').dirty || formGroup.get('title').touched)">
+            {{  validation.message  }}
+          </div>
+        </ng-container>
+      </div>
 
-  <button ion-button block (click)="editMediaItem(mediaItem)">Edit Media</button>
+      <ion-item>
+        <ion-label floating>URL</ion-label>
+        <ion-input type="url" formControlName="url" [(ngModel)]="mediaItem.url"></ion-input>
+      </ion-item>
+      <div ion-text color="danger" class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.url">
+          <div class="error-message" color="danger" *ngIf="formGroup.get('url').hasError(validation.type) && (formGroup.get('url').dirty || formGroup.get('url').touched)">
+            {{  validation.message  }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input type="textarea" color="danger" formControlName="descript" [(ngModel)]="mediaItem.descript"></ion-input>
+      </ion-item>
+      <div ion-text color="danger" class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.descript">
+          <div class="error-message" color="danger" *ngIf="formGroup.get('descript').hasError(validation.type) && (formGroup.get('descript').dirty || formGroup.get('descript').touched)">
+            {{  validation.message  }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Thumbnail</ion-label>
+        <ion-input type="url" formControlName="thmbnl_url" [(ngModel)]="mediaItem.thmbnl_url"></ion-input>
+      </ion-item>
+      <div ion-text color="danger" class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.thmbnl_url">
+          <div class="error-message" color="danger" *ngIf="formGroup.get('thmbnl_url').hasError(validation.type) && (formGroup.get('thmbnl_url').dirty || formGroup.get('thmbnl_url').touched)">
+            {{  validation.message  }}
+          </div>
+        </ng-container>
+      </div>
+
+    </ion-list>
+    <button ion-button block [disabled]="formGroup.invalid" (click)="editMediaItem(mediaItem)">Make Edits Permanent</button>
+  </form>
+
 
 </ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>View Media</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="selectMediaOptions(mediaItem.key)">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <h1>{{mediaItem.title}}</h1>
+    <img src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+    <p>{{mediaItem.descript}}</p>
+    <p>{{mediaItem.url}}</p>
+  </ion-item>
+
+</ion-content>

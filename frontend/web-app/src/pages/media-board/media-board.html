@@ -1,9 +1,3 @@
-<!--
-  Generated template for the MediaBoardPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -24,7 +18,8 @@
     <ion-item *ngFor="let media of mediaListRef$ | async"
     (click)="selectMediaItem(media.key)">
       <h2>{{media.payload.val().title}}</h2>
-      <h3>{{media.payload.val().url}}</h3>
+      <img src="{{ media.payload.val().thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+      <p>{{media.payload.val().descript}}</p>
     </ion-item>
   </ion-list>
 

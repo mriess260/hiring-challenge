@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { EditMediaPage } from './edit-media';
+import { ViewMediaPage } from './view-media';
 
 @NgModule({
   declarations: [
-    EditMediaPage,
+    ViewMediaPage,
   ],
   imports: [
-    IonicPageModule.forChild(EditMediaPage),
+    IonicPageModule.forChild(ViewMediaPage),
   ],
 })
-export class EditMediaPageModule {}
+export class ViewMediaPageModule {}
