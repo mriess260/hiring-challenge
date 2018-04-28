@@ -2,14 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 //--------
-//import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FireBaseListObservable, AngularFireList } from 'angularfire2/database';
-import { AddMediaPage } from '../add-media/add-media';
-import { MediaItem } from '../../models/media-item/media-item.'
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
+//---------
+import { AddMediaPage } from '../add-media/add-media';
+import { EditMediaPage } from '../edit-media/edit-media';
+import { MediaItem } from '../../models/media-item/media-item.interface';
 //--------
 
 @Component({
@@ -18,12 +17,6 @@ import 'rxjs/add/operator/map';
 })
 export class MediaBoardPage {
 
-  //database observable reference
-  /**
-  mediaListRef$: FireBaseListObservable<MediaItem[]>
-  //
-  mediaListTransactRef$: FireBaseListObservable<MediaItem[]>
-  */
   mediaListRef$: AngularFireList<MediaItem>;
   mediaList$: Observable<MediaItem[]>
 
@@ -31,13 +24,9 @@ export class MediaBoardPage {
   private database: AngularFireDatabase, private actionSheetCtrl: ActionSheetController) {
 
     //point reference at firabase -> 'media-list' node
-    //this.mediaListRef$ = this.database.list('media-list');//.snapshotChanges();
-
     this.mediaListTransactRef$ = this.database.list('media-list');
     this.mediaListRef$ = this.mediaListTransactRef$.snapshotChanges();
 
-
-    //this.mediaListRef$.subscribe(x => console.log(x));
   }
 
   selectMediaItem(key: string, title: string){
@@ -49,7 +38,8 @@ export class MediaBoardPage {
         {
           text: 'Edit',
           handler: () => {
-            //go to editMediaItemPage, passing key as param
+            //go to editMediaPage, passing key (id) as param
+            this.navCtrl.push(EditMediaPage, { mediaItemId: key });
           }
         },
         {

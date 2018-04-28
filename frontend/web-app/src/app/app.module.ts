@@ -9,6 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { FIREBASE_CREDENTS } from './firebase.credentials';
 import { MediaBoardPage } from '../pages/media-board/media-board';
 import { AddMediaPage } from '../pages/add-media/add-media';
+import { EditMediaPage } from  '../pages/edit-media/edit-media';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 //------------
 
@@ -19,7 +20,8 @@ import { MyApp } from './app.component';
   declarations: [
     MyApp,
     MediaBoardPage,
-    AddMediaPage
+    AddMediaPage,
+    EditMediaPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { MyApp } from './app.component';
   entryComponents: [
     MyApp,
     MediaBoardPage,
-    AddMediaPage
+    AddMediaPage,
+    EditMediaPage
   ],
   providers: [
     StatusBar,
