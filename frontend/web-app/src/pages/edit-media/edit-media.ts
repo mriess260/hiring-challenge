@@ -29,6 +29,9 @@ export class EditMediaPage {
   		{ type: 'minlength', message: 'Title must be at least 1 character(s) long.' },
   		{ type: 'maxlength', message: 'Title cannot be more than 25 characters long.' }
   	],
+    'type': [
+    		{ type: 'required', message: 'type is required.' }
+    	],
   	'url': [
   		{ type: 'required', message: 'Media URL/Link is required.' },
       { type: 'minlength', message: 'URL must be at least 10 character(s) long.' },
@@ -59,14 +62,25 @@ export class EditMediaPage {
 
     this.formGroup = formBuilder.group({
       title:['', Validators.compose([Validators.minLength(1), Validators.required])],
-      url:['', Validators.compose([
-        Validators.pattern('^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'),
+      type:['', Validators.required],
+      img_url:['', Validators.compose([
+        Validators.pattern('(http)?s?:?(\/\/[^"\']*\.(?:png|jpg|jpeg|gif|png|svg|bmp|tif))'),
+        Validators.minLength(10),
+          Validators.required
+      ])],
+      vid_url:['', Validators.compose([
+        Validators.pattern('(http)?s?:?(\/\/[^"\']*\.(?:mp4|mpv|ogv|webm|3gp|mov|avi|wmv|m3u8))'),
+        Validators.minLength(10),
+          Validators.required
+      ])],
+      aud_url:['', Validators.compose([
+        Validators.pattern('(http)?s?:?(\/\/[^"\']*\.(?:aac|mp4|m4a|mp1|mp2|mp3|mpg|mpeg|oga|ogg|wav|webm))'),
         Validators.minLength(10),
           Validators.required
       ])],
       descript:['', Validators.maxLength(1024)],
       thmbnl_url:['', Validators.compose([
-        Validators.pattern('^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'),
+        Validators.pattern('(http)?s?:?(\/\/[^"\']*\.(?:png|jpg|jpeg|gif|png|svg|bmp|tif))'),
         Validators.minLength(10),
         Validators.required
       ])]

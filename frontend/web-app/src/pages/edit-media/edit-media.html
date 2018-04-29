@@ -11,6 +11,30 @@
   <form [formGroup]="formGroup">
 
     <ion-list>
+
+      <ion-label floating>Media Type</ion-label>
+      <ion-list radio-group formControlName="type" [(ngModel)]="mediaItem.type">
+        <ion-item>
+          <ion-label>Image</ion-label>
+          <ion-radio value="image" checked></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Video</ion-label>
+          <ion-radio value="video"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Audio</ion-label>
+          <ion-radio value="audio"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <div ion-text color="danger" class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.type">
+          <div class="error-message" *ngIf="formGroup.get('type').hasError(validation.type) && (formGroup.get('type').dirty)">
+            {{  validation.message  }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item>
         <ion-label floating>Title</ion-label>
         <ion-input type="text" formControlName="title" [(ngModel)]="mediaItem.title"></ion-input>
@@ -25,11 +49,19 @@
 
       <ion-item>
         <ion-label floating>URL</ion-label>
-        <ion-input type="url" formControlName="url" [(ngModel)]="mediaItem.url"></ion-input>
+          <ion-input *ngIf="mediaItem.type == 'image' || mediaItem.type == null" type="url" formControlName="img_url" [(ngModel)]="mediaItem.url"></ion-input>
+          <ion-input *ngIf="mediaItem.type == 'video'" type="url" formControlName="vid_url" [(ngModel)]="mediaItem.url"></ion-input>
+          <ion-input *ngIf="mediaItem.type == 'audio'" type="url" formControlName="aud_url" [(ngModel)]="mediaItem.url"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.url">
-          <div class="error-message" color="danger" *ngIf="formGroup.get('url').hasError(validation.type) && (formGroup.get('url').dirty || formGroup.get('url').touched)">
+          <div class="error-message" color="danger" *ngIf="(mediaItem.type == 'image' || mediaItem.type == null) && formGroup.get('img_url').hasError(validation.type) && (formGroup.get('img_url').dirty || formGroup.get('img_url').touched)">
+            {{  validation.message  }}
+          </div>
+          <div class="error-message" color="danger" *ngIf="mediaItem.type == 'video' && formGroup.get('vid_url').hasError(validation.type) && (formGroup.get('vid_url').dirty || formGroup.get('vid_url').touched)">
+            {{  validation.message  }}
+          </div>
+          <div class="error-message" color="danger" *ngIf="mediaItem.type == 'audio' && formGroup.get('aud_url').hasError(validation.type) && (formGroup.get('aud_url').dirty || formGroup.get('aud_url').touched)">
             {{  validation.message  }}
           </div>
         </ng-container>
@@ -60,7 +92,9 @@
       </div>
 
     </ion-list>
-    <button ion-button block [disabled]="formGroup.invalid" (click)="editMediaItem(mediaItem)">Make Edits Permanent</button>
+    <button ion-button block *ngIf="mediaItem.type == 'image' || mediaItem.type == null" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.img_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
+    <button ion-button block *ngIf="mediaItem.type == 'video'" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.vid_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
+    <button ion-button block *ngIf="mediaItem.type == 'audio'" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.aud_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
   </form>
 
 
