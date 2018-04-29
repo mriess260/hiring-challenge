@@ -28,7 +28,7 @@
         </ion-item>
       </ion-list>
       <div ion-text color="danger" class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.type">
+        <ng-container *ngFor="let validation of mediaForm.validationMessages.type">
           <div class="error-message" *ngIf="formGroup.get('type').hasError(validation.type) && (formGroup.get('type').dirty)">
             {{  validation.message  }}
           </div>
@@ -40,7 +40,7 @@
         <ion-input type="text" formControlName="title" [(ngModel)]="mediaItem.title"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.title">
+        <ng-container *ngFor="let validation of mediaForm.validationMessages.title">
           <div class="error-message" *ngIf="formGroup.get('title').hasError(validation.type) && (formGroup.get('title').dirty || formGroup.get('title').touched)">
             {{  validation.message  }}
           </div>
@@ -54,7 +54,7 @@
           <ion-input *ngIf="mediaItem.type == 'audio'" type="url" formControlName="aud_url" [(ngModel)]="mediaItem.url"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.url">
+        <ng-container *ngFor="let validation of mediaForm.validationMessages.url">
           <div class="error-message" color="danger" *ngIf="(mediaItem.type == 'image' || mediaItem.type == null) && formGroup.get('img_url').hasError(validation.type) && (formGroup.get('img_url').dirty || formGroup.get('img_url').touched)">
             {{  validation.message  }}
           </div>
@@ -72,7 +72,7 @@
         <ion-input type="textarea" color="danger" formControlName="descript" [(ngModel)]="mediaItem.descript"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.descript">
+        <ng-container *ngFor="let validation of mediaForm.validationMessages.descript">
           <div class="error-message" color="danger" *ngIf="formGroup.get('descript').hasError(validation.type) && (formGroup.get('descript').dirty || formGroup.get('descript').touched)">
             {{  validation.message  }}
           </div>
@@ -84,7 +84,7 @@
         <ion-input type="url" formControlName="thmbnl_url" [(ngModel)]="mediaItem.thmbnl_url"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.thmbnl_url">
+        <ng-container *ngFor="let validation of mediaForm.validationMessages.thmbnl_url">
           <div class="error-message" color="danger" *ngIf="formGroup.get('thmbnl_url').hasError(validation.type) && (formGroup.get('thmbnl_url').dirty || formGroup.get('thmbnl_url').touched)">
             {{  validation.message  }}
           </div>

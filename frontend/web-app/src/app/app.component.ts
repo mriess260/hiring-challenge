@@ -8,7 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MediaBoardPage } from '../pages/media-board/media-board';
 import { AddMediaPage } from '../pages/add-media/add-media';
 import { ViewMediaPage } from '../pages/view-media/view-media';
-import { EditMediaPage } from '../pages/edit-media/edit/media';
+import { EditMediaPage } from '../pages/edit-media/edit-media';
 //----------
 
 @Component({
