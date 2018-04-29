@@ -3,7 +3,7 @@
   <ion-navbar color="primary">
     <ion-title>View Media</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="selectMediaOptions(mediaItem.key)">
+      <button ion-button icon-only (click)="selectMediaOptions()">
         <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,7 +16,25 @@
 
   <ion-item>
     <h1>{{mediaItem.title}}</h1>
+
     <img src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+
+    <div *ngIf="mediaItem.type == 'image'">
+      <img src="{{ mediaItem.url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+    </div>
+    <div *ngIf="mediaItem.type == 'video'">
+      <video class="videosize" controls>
+        <source src="{{ mediaItem.url }}">
+        Your browser does not support the video element.
+      </video>
+    </div>
+    <div *ngIf="mediaItem.type == 'audio'; else">
+      <audio controls>
+        <source src="{{ mediaItem.url }}">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
     <p>{{mediaItem.descript}}</p>
     <p>{{mediaItem.url}}</p>
   </ion-item>
