@@ -2,6 +2,31 @@ page-view-media {
   .videosize {
     width: 100%;
     height: 100%;
-
+  }
+  .image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 95%;
+    height: 95%;
+  }
+  .thmbnl {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border:1px solid #021a40;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1%;
+  }
+  .view-chunk{
+    display:inline-block;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .text{
+    user-select: text;
   }
 }

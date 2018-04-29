@@ -14,29 +14,33 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <h1>{{mediaItem.title}}</h1>
-
-    <img src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
-
+  <ion-item text-wrap>
+    <div class="view-chunk">
+      <h1>{{mediaItem.title}}</h1>
+    </div>
     <div *ngIf="mediaItem.type == 'image'">
-      <img src="{{ mediaItem.url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+      <img class="image" src="{{ mediaItem.url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
     </div>
     <div *ngIf="mediaItem.type == 'video'">
+      <img class="thmbnl" src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
       <video class="videosize" controls>
         <source src="{{ mediaItem.url }}">
         Your browser does not support the video element.
       </video>
     </div>
-    <div *ngIf="mediaItem.type == 'audio'; else">
+    <div *ngIf="mediaItem.type == 'audio'">
+      <img class="thmbnl" src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
       <audio controls>
         <source src="{{ mediaItem.url }}">
         Your browser does not support the audio element.
       </audio>
     </div>
 
-    <p>{{mediaItem.descript}}</p>
-    <p>{{mediaItem.url}}</p>
+    <h3 class="view-chunk">{{mediaItem.descript}}</h3>
+    <button ion-button block *ngIf="hideURL == false" (click)="toggleURL()">Hide URLL</button>
+    <button ion-button block *ngIf="hideURL == true" (click)="toggleURL()">Show URL</button>
+    <p class="text" *ngIf="hideURL == false">{{mediaItem.url}}</p>
+
   </ion-item>
 
 </ion-content>

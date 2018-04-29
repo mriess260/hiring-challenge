@@ -21,6 +21,8 @@ export class ViewMediaPage {
   mediaItemSubscription: Subscription;
   mediaItem = {} as MediaItem;
 
+  hideURL: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private database: AngularFireDatabase, private actionSheetCtrl: ActionSheetController) {
 
@@ -29,6 +31,8 @@ export class ViewMediaPage {
 
       this.mediaItemSubscription = this.database.object(`media-list/${this.navParams.get('mediaItemId')}`)
       .valueChanges().subscribe(mediaItem => this.mediaItem = mediaItem);
+
+      this.hideURL = true;
   }
 
   selectMediaOptions(){
@@ -67,10 +71,13 @@ export class ViewMediaPage {
     }).present();
   }
 
+  toggleURL(){
+    this.hideURL = !this.hideURL
+  }
 
-    ionViewWillLeave(){
-      //unsubscribe from observable when leave
-      this.mediaItemSubscription.unsubscribe();
-    }
+  ionViewWillLeave(){
+    //unsubscribe from observable when leave
+    this.mediaItemSubscription.unsubscribe();
+  }
 
 }
