@@ -15,7 +15,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 //------------
 
 import { MyApp } from './app.component';
-//XXXimport { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [

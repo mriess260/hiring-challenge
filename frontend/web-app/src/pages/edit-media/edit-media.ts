@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //----------------
-import {  AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription'
 //----------------
@@ -24,10 +25,12 @@ export class EditMediaPage {
 
   formGroup: FormGroup;
 
+  //controls exit before submission error message
+  showWarning: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   private database: AngularFireDatabase, public formBuilder: FormBuilder,
-  private mediaForm: MediaForm) {
+  private mediaForm: MediaForm, private alertCtrl: AlertController) {
 
     //capture mediaItemId as NavParam
     const mediaItemId = this.navParams.get('mediaItemId');
@@ -42,6 +45,9 @@ export class EditMediaPage {
 
     this.formGroup = formBuilder.group(this.mediaForm.formgroupTemplate);
 
+    //set default to show warning on exit attempt
+    this.showWarning = true;
+
   }
 
 
@@ -52,6 +58,9 @@ export class EditMediaPage {
     //Clear mediaItem
     this.mediaItem = {} as MediaItem;
 
+    //disable warning message
+    this.showWarning = false;
+
     //go back to media board
     this.navCtrl.pop();
   }
@@ -60,6 +69,43 @@ export class EditMediaPage {
   ionViewWillLeave(){
     //unsubscribe from observable when leave
     this.mediaItemSubscription.unsubscribe();
+  }
+
+  ionViewCanLeave() {
+    if(this.showWarning) {
+
+      //display warning message
+      let alertPopup = this.alertCtrl.create({
+        title: 'Exit',
+        message: 'Are you sure? The new media has not been saved. All entered data will be lost.',
+        buttons: [{
+          text: 'Exit',
+          handler: () => {
+            alertPopup.dismiss();
+            this.exitPage();
+            return false;
+          }
+        },
+        {
+          text: 'Stay',
+          handler: () => {
+          alertPopup.dismiss();
+          return false;
+        }
+      }]
+    });
+
+      // Show the alert
+      alertPopup.present();
+
+      // Return false to avoid the page to be popped up
+      return false;
+    }
+  }
+
+  private exitPage() {
+    this.showWarning = false;
+    this.navCtrl.pop();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //------------
+import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 //------------
@@ -25,9 +26,12 @@ export class AddMediaPage {
 
   formGroup: FormGroup;
 
+  //controls exit before submission error message
+  showWarning: boolean = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
   private database: AngularFireDatabase, public formBuilder: FormBuilder,
-  private mediaForm: MediaForm) {
+  private mediaForm: MediaForm, private alertCtrl: AlertController) {
 
     this.formGroup = formBuilder.group(this.mediaForm.formgroupTemplate);
 
@@ -55,10 +59,50 @@ export class AddMediaPage {
       thmbnl_url: this.mediaItem.thmbnl_url
     });
 
+    //disable warning message
+    this.showWarning = false;
+
     //Clear mediaItem
     this.mediaItem = {} as MediaItem;
 
     //go back to media board
+    this.navCtrl.pop();
+  }
+
+  ionViewCanLeave() {
+    if(this.showWarning) {
+
+      //display warning message
+      let alertPopup = this.alertCtrl.create({
+        title: 'Exit',
+        message: 'Are you sure? The new media has not been saved. All entered data will be lost.',
+        buttons: [{
+          text: 'Exit',
+          handler: () => {
+            alertPopup.dismiss();
+            this.exitPage();
+            return false;
+          }
+        },
+        {
+          text: 'Stay',
+          handler: () => {
+          alertPopup.dismiss();
+          return false;
+        }
+      }]
+    });
+
+      // Show the alert
+      alertPopup.present();
+
+      // Return false to avoid the page to be popped up
+      return false;
+    }
+  }
+
+  private exitPage() {
+    this.showWarning = false;
     this.navCtrl.pop();
   }
 

@@ -27,6 +27,7 @@ export class MediaForm{
     ]
   };
 
+  //formgroup template for instantiating formbuilder
   public formgroupTemplate = {
     title:['', Validators.compose([Validators.minLength(1), Validators.required])],
     type:['', Validators.required],
