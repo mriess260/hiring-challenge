@@ -22,4 +22,30 @@ page-media-board {
     margin-left: 0%;
     word-wrap: break-word;
   }
+  .logo {
+    border: 0px;
+    max-width: 50px;
+    max-height: 50px;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .nav {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .align-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 90px 1px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+  .wrapper {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 }

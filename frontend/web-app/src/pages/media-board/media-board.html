@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Media Board</ion-title>
+    <img class="logo" src="../../../assets/imgs/bloop.svg"/>
     <ion-buttons end>
       <button ion-button icon-only (click)="gotoAddMediaPage()">
         <ion-icon name="add"></ion-icon>
@@ -17,9 +17,9 @@
     <!-- reiterates for each piece of media in list -->
     <ion-item class="center" *ngFor="let media of mediaListRef$ | async" (click)="selectMediaItem(media.key)">
       <div class="left">
-        <h1>{{media.payload.val().title}}</h1>
+        <h1 class="wrapper" text-wrap>{{media.payload.val().title}}</h1>
         <img src="{{ media.payload.val().thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
-        <p>{{media.payload.val().descript}}</p>
+        <p text-wrap>{{media.payload.val().descript}}</p>
       </div>
     </ion-item>
   </ion-list>

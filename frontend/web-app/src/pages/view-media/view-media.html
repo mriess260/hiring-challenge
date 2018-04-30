@@ -35,12 +35,11 @@
         Your browser does not support the audio element.
       </audio>
     </div>
-    <div *ngIf="mediaItem.type == 'other'">
+    <div *ngIf="mediaItem.type == 'misc'">
       <img class="thmbnl" src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
-      <h1>
-        Embedding is not supported for this media type.<br/>
-        Use URL to access media manually.
-      </h1>
+      <h3>
+        Embedding is not supported for this media type. Use URL to access media manually.
+      </h3>
     </div>
 
     <h3 class="view-chunk">{{mediaItem.descript}}</h3>
