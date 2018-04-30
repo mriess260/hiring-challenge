@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { Subscription } from 'rxjs/Subscription'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { AlertController } from 'ionic-angular';
 //-----------
 import { EditMediaPage } from '../edit-media/edit-media';
 import { MediaItem } from '../../models/media-item/media-item.interface';
@@ -21,12 +22,14 @@ export class ViewMediaPage {
   mediaItemSubscription: Subscription;
   mediaItem = {};// as MediaItem;
 
+  //used to toggle view of url
   hideURL: boolean;
 
   mediaItemId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private database: AngularFireDatabase, private actionSheetCtrl: ActionSheetController) {
+    private database: AngularFireDatabase, private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController) {
 
       //capture mediaItemId as NavParam
       this.mediaItemId = this.navParams.get('mediaItemId');
@@ -58,10 +61,9 @@ export class ViewMediaPage {
           text: 'Delete',
           role: 'Destructive',
           handler: () => {
-            //delete current piece of media and exit
-            this.mediaItemSubscription.unsubscribe();
-            this.database.list('media-list').remove(this.navParams.get('mediaItemId'));
-            this.navCtrl.pop();
+            setTimeout(() => {  //workaround for known bug (nesting alertcontroller in actionsheet controller)
+              this.showDeleteWarning();
+            }, 0);
           }
         },
         {
@@ -74,6 +76,38 @@ export class ViewMediaPage {
         }
       ]
     }).present();
+  }
+
+  showDeleteWarning() {
+    //display warning message
+    let alertPopup = this.alertCtrl.create({
+      title: 'Warning',
+      message: 'Are you sure? If you delete this record, it cannot be restored.',
+      buttons: [{
+        text: 'Delete',
+        handler: () => {
+          //delete current piece of media, cleanup, and exit
+          alertPopup.dismiss();
+          this.mediaItemSubscription.unsubscribe();
+          this.database.list('media-list').remove(this.navParams.get('mediaItemId'));
+          this.navCtrl.pop();
+          return false;
+        }
+      },
+      {
+        text: 'Cancel',
+        handler: () => {
+          alertPopup.dismiss();
+          return false;
+        }
+      }]
+    });
+
+    // Show the alert
+    alertPopup.present();
+
+    // Return false to avoid the page to be popped up
+    return false;
   }
 
 
@@ -94,7 +128,5 @@ export class ViewMediaPage {
     //unsubscribe from observable when leave
     this.mediaItemSubscription.unsubscribe();
   }
-
-  ionView
 
 }
