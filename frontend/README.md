@@ -4,16 +4,19 @@ A mobile media catalogue and storage app. Users can add, remove, edit, and view 
 
 ## Getting Started
 
-To easily build and run the application use the command "$ ionic serve --lab"
+To easily build and run the application use the command
+```
+$ ionic serve --lab
+```
 This should open up a new tab in which emulated ios and android devices run the app. You may be prompted to download dependencies, these will be required to run the application.
 
 ### Prerequisites
 
-NPM (Node Project Mangager)
-ionic 3
-
+* NPM (Node Project Mangager)
+* ionic 3
+Once npm is installed, ionic can be installed using 
 ```
-Once npm is installed, ionic can be installed using "$ npm install ionic -g"
+"$ npm install ionic -g
 ```
 
 ## Built With
