@@ -19,7 +19,7 @@
 
     <ion-list>
 
-      <ion-label floating>Media Type</ion-label>
+      <ion-label floating></ion-label>
       <ion-list radio-group formControlName="type" [(ngModel)]="mediaItem.type">
         <ion-item>
           <ion-label>Image</ion-label>
@@ -33,6 +33,11 @@
           <ion-label>Audio</ion-label>
           <ion-radio value="audio"></ion-radio>
         </ion-item>
+        <ion-item>
+          <ion-label>Other & Non-File<br/>
+            (Youtube, Twitch, etc.)</ion-label>
+          <ion-radio value="misc"></ion-radio>
+        </ion-item>
       </ion-list>
       <div ion-text color="danger" class="validation-errors">
         <ng-container *ngFor="let validation of mediaForm.validationMessages.type">
@@ -43,7 +48,7 @@
       </div>
 
       <ion-item>
-        <ion-label floating>Title</ion-label>
+        <ion-label floating>Title<span color="danger"> *</span></ion-label>
         <ion-input type="text" formControlName="title" [(ngModel)]="mediaItem.title"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
@@ -55,10 +60,11 @@
       </div>
 
       <ion-item>
-        <ion-label floating>URL</ion-label>
+        <ion-label floating>URL<span color="danger"> *</span></ion-label>
           <ion-input *ngIf="mediaItem.type == 'image' || mediaItem.type == null" type="url" formControlName="img_url" [(ngModel)]="mediaItem.url"></ion-input>
           <ion-input *ngIf="mediaItem.type == 'video'" type="url" formControlName="vid_url" [(ngModel)]="mediaItem.url"></ion-input>
           <ion-input *ngIf="mediaItem.type == 'audio'" type="url" formControlName="aud_url" [(ngModel)]="mediaItem.url"></ion-input>
+          <ion-input *ngIf="mediaItem.type == 'misc'" type="url" formControlName="msc_url" [(ngModel)]="mediaItem.url"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
         <ng-container *ngFor="let validation of mediaForm.validationMessages.url">
@@ -69,6 +75,9 @@
             {{  validation.message  }}
           </div>
           <div class="error-message" color="danger" *ngIf="mediaItem.type == 'audio' && formGroup.get('aud_url').hasError(validation.type) && (formGroup.get('aud_url').dirty || formGroup.get('aud_url').touched)">
+            {{  validation.message  }}
+          </div>
+          <div class="error-message" color="danger" *ngIf="mediaItem.type == 'misc' && formGroup.get('msc_url').hasError(validation.type) && (formGroup.get('msc_url').dirty || formGroup.get('msc_url').touched)">
             {{  validation.message  }}
           </div>
         </ng-container>
@@ -87,7 +96,7 @@
       </div>
 
       <ion-item>
-        <ion-label floating>Thumbnail</ion-label>
+        <ion-label floating>Thumbnail URL<span color="danger"> *</span></ion-label>
         <ion-input type="url" formControlName="thmbnl_url" [(ngModel)]="mediaItem.thmbnl_url"></ion-input>
       </ion-item>
       <div ion-text color="danger" class="validation-errors">
@@ -102,6 +111,7 @@
     <button ion-button block *ngIf="mediaItem.type == 'image' || mediaItem.type == null" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.img_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
     <button ion-button block *ngIf="mediaItem.type == 'video'" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.vid_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
     <button ion-button block *ngIf="mediaItem.type == 'audio'" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.aud_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
+    <button ion-button block *ngIf="mediaItem.type == 'misc'" [disabled]="formGroup.controls.title.invalid || formGroup.controls.thmbnl_url.invalid || !formGroup.controls.descript.valid || formGroup.controls.msc_url.invalid" (click)="addMediaItem(mediaItem)">Add Media</button>
   </form>
 
 </ion-content>

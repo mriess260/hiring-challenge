@@ -35,6 +35,13 @@
         Your browser does not support the audio element.
       </audio>
     </div>
+    <div *ngIf="mediaItem.type == 'other'">
+      <img class="thmbnl" src="{{ mediaItem.thmbnl_url }}" onError="this.src='../../assets/imgs/dead_link.png'"/>
+      <h1>
+        Embedding is not supported for this media type.<br/>
+        Use URL to access media manually.
+      </h1>
+    </div>
 
     <h3 class="view-chunk">{{mediaItem.descript}}</h3>
     <button ion-button block *ngIf="hideURL == false" (click)="toggleURL()">Hide URLL</button>

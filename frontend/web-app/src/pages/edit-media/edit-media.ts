@@ -21,7 +21,7 @@ export class EditMediaPage {
   //mediaItemRef$: FireBaseObjectObservable<MediaItem>;
   mediaItemRef$: AngularFireObject<MediaItem>;
   mediaItemSubscription: Subscription;
-  mediaItem = {} as MediaItem;
+  mediaItem = {};// as MediaItem;
 
   formGroup: FormGroup;
 
@@ -77,7 +77,7 @@ export class EditMediaPage {
       //display warning message
       let alertPopup = this.alertCtrl.create({
         title: 'Exit',
-        message: 'Are you sure? The new media has not been saved. All entered data will be lost.',
+        message: 'Are you sure? Your changes have not been saved. All edited data will be lost.',
         buttons: [{
           text: 'Exit',
           handler: () => {
@@ -103,6 +103,7 @@ export class EditMediaPage {
     }
   }
 
+  //exits (pops) page without triggering warning message
   private exitPage() {
     this.showWarning = false;
     this.navCtrl.pop();

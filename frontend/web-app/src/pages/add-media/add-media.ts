@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 //------------
 import { AlertController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 //------------
 import { MediaItem } from '../../models/media-item/media-item.interface';
@@ -22,7 +22,7 @@ export class AddMediaPage {
   mediaItem = {} as MediaItem;
 
   //database observable reference
-  mediaItemRef$: FirebaseListObservable<MediaItem[]>;
+  mediaItemRef$: AngularFireList<MediaItem>;
 
   formGroup: FormGroup;
 
@@ -50,14 +50,8 @@ export class AddMediaPage {
       this.mediaItem.type = "image";
     }
 
-    this.mediaItemRef$.push({
-      type: this.mediaItem.type,
-      title: this.mediaItem.title,
-      type: this.mediaItem.type,
-      url: this.mediaItem.url,
-      descript: this.mediaItem.descript,
-      thmbnl_url: this.mediaItem.thmbnl_url
-    });
+    //add new media item to database
+    this.mediaItemRef$.push(this.mediaItem);
 
     //disable warning message
     this.showWarning = false;
@@ -101,6 +95,7 @@ export class AddMediaPage {
     }
   }
 
+  //exits (pops) page without triggering warning message
   private exitPage() {
     this.showWarning = false;
     this.navCtrl.pop();

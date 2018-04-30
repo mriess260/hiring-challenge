@@ -4,14 +4,14 @@ export class MediaForm{
 
   //form validation error messages
   public validationMessages = {
-  'title': [
+  'type': [
+      { type: 'required', message: 'type is required.' }
+    ],
+    'title': [
       { type: 'required', message: 'Title is required.' },
       { type: 'minlength', message: 'Title must be at least 1 character(s) long.' },
       { type: 'maxlength', message: 'Title cannot be more than 25 characters long.' }
     ],
-    'type': [
-        { type: 'required', message: 'type is required.' }
-      ],
     'url': [
       { type: 'required', message: 'Media URL/Link is required.' },
       { type: 'minlength', message: 'URL must be at least 10 character(s) long.' },
@@ -43,6 +43,11 @@ export class MediaForm{
     ])],
     aud_url:['', Validators.compose([
       Validators.pattern('(http)?s?:?(\/\/[^"\']*\.(?:aac|mp4|m4a|mp1|mp2|mp3|mpg|mpeg|oga|ogg|wav|webm))'),
+      Validators.minLength(10),
+        Validators.required
+    ])],
+    msc_url:['', Validators.compose([
+      Validators.pattern('((http)?s?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})'),
       Validators.minLength(10),
         Validators.required
     ])],
