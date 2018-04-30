@@ -26,7 +26,7 @@ Once npm is installed, ionic can be installed using
 * [ionic 3.20.0](https://ionicframework.com/) - The web framework used
 * [Angular 5.2.10](https://angular.io/) - typescript-based developement framework
 * [Firebase](https://firebase.google.com/) - Database
-* [Cordova](https://cordova.apache.org/) - platform for building native mobile apps using HTML5, CSS and JavaScript.
+* [Cordova 8.0.0](https://cordova.apache.org/) - platform for building native mobile apps using HTML5, CSS and JavaScript.
 
 ## Author
 
