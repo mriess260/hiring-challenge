@@ -13,7 +13,7 @@ This should open up a new tab in which emulated ios and android devices run the 
 ### Prerequisites
 
 * NPM (Node Project Mangager)
-* ionic 3
+* ionic 3. 
 Once npm is installed, ionic can be installed using 
 ```
 "$ npm install ionic -g
