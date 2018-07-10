@@ -1,7 +1,33 @@
-# Maestro's Hiring Challenge
-So you want to be a Maestronaut? We’re very proud of the team we have built and the direction we are heading as an organization. As we continue to grow, we are excited to bring on more devs to drive our cause. If you’re up for the challenge, maybe you’ll be the next to join our team and help us drive the future of JavaScript, while knocking out beautiful, performance-driven applications for our clients.
+# Media Board App
 
-## Interest Areas
-[Frontend Challenge](https://github.com/TeamMaestro/hiring-challenge/blob/master/frontend.md)
+A mobile media catalogue and storage app. Users can add, remove, edit, and view various forms of media including images, videos, and music.
 
-[Backend Challenge](https://github.com/TeamMaestro/hiring-challenge/blob/master/backend.md)
+## Getting Started
+
+To easily build and run the application use the command
+```
+$ ionic serve --lab
+```
+This should open up a new tab in which emulated ios and android devices run the app. You may be prompted to download dependencies, these will be required to run the application.
+
+### Prerequisites
+
+* NPM (Node Project Mangager)
+* ionic 3
+
+Once npm is installed, ionic can be installed using 
+```
+"$ npm install ionic -g
+```
+
+## Built With
+
+* [npm 5.8.0](https://www.npmjs.com/) - Package and dependency management
+* [ionic 3.20.0](https://ionicframework.com/) - The web framework used
+* [Angular 5.2.10](https://angular.io/) - typescript-based developement framework
+* [Firebase](https://firebase.google.com/) - Database
+* [Cordova 8.0.0](https://cordova.apache.org/) - platform for building native mobile apps using HTML5, CSS and JavaScript.
+
+## Author
+
+* **Michael Riess**
